@@ -1,0 +1,45 @@
+# --- Logs ---
+*.log
+logs/
+
+# --- Zarr stores ---
+*.zarr/
+
+#---Tar files ---
+*.tar
+
+
+# --- Credentials -- NEVER commit these ---
+.cdsapirc
+.ecmwfapirc
+*.key
+*api_key*
+
+# --- Scratch / intermediate downloads ---
+s2s_work/
+*.grib
+*.grb
+*.nc
+
+# --- Slurm job artifacts ---
+slurm_*.log
+slurm_*.err
+*.out
+
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+*.egg-info/
+.pytest_cache/
+
+# --- Environment ---
+.env
+.venv/
+env/
+
+# --- OS / editor cruft ---
+.DS_Store
+.vscode/
+*.swp
