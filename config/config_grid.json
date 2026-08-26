@@ -1,0 +1,10 @@
+{
+  "grids_1deg": {
+    "grid": ["1.0", "1.0"],
+    "description": "1 degree x 1 degree, "
+  },
+  "grids_0p25deg": {
+    "grid": ["0.25", "0.25"],
+    "description": "0.25 degree x 0.25 degree, ECDS default native-ish resolution"
+  }
+}

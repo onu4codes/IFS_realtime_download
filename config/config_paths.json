@@ -1,0 +1,24 @@
+{
+  "default": {
+    "zarr_store": "s2s_reforecast.zarr",
+    "zarr_store_sorted": "s2s_reforecast_sorted.zarr",
+    "workdir": "s2s_work",
+    "log_file": "logs/pipeline.log",
+    "description": "Main output zarr store, its time-sorted counterpart, scratch download directory, and single shared pipeline log file, all sibling to config/ and utils/ at the repo root"
+  },
+  "rainfall_0p25deg": {
+    "zarr_store": "s2s_rainfall_0p25.zarr",
+    "zarr_store_sorted": "s2s_rainfall_0p25_sorted.zarr",
+    "workdir": "s2s_work_rainfall_0p25",
+    "log_file": "logs/pipeline_rainfall_0p25.log",
+    "description": "Rainfall-only download at 0.25 degree resolution"
+  },
+  "s2s_downscaling": {
+    "zarr_store": "s2s_predictors.zarr",
+    "zarr_store_sorted": "s2s_predictors_sorted.zarr",
+    "workdir": "s2s_work_predictors",
+    "log_file": "logs/pipeline_predictors.log",
+    "description": "Predictor variables for downscaling, including 2m temperature, pressure-level variables, and total precipitation  "
+  }
+
+}

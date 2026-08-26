@@ -1,0 +1,137 @@
+{
+  "combination_1": {
+    "wind_msl": {
+      "cds_variable": ["10_m_u_component_of_wind", "10_m_v_component_of_wind", "mean_sea_level_pressure"],
+      "level_type": "single_level",
+      "level_value": null,
+      "leadtime_type": "point",
+      "leadtime_start": 0,
+      "leadtime_end": 1008,
+      "leadtime_step": 24,
+      "output_names": {
+        "u10": "10m_u_component_of_wind",
+        "v10": "10m_v_component_of_wind",
+        "msl": "mean_sea_level_pressure"
+      },
+      "postprocess": null
+    },
+    "precip": {
+      "cds_variable": ["total_precipitation"],
+      "level_type": "single_level",
+      "level_value": null,
+      "leadtime_type": "point",
+      "leadtime_start": 0,
+      "leadtime_end": 1008,
+      "leadtime_step": 24,
+      "output_names": {
+        "tp": "total_precipitation"
+      },
+      "postprocess": "deaccumulate"
+    },
+    "t2m": {
+      "cds_variable": ["2_m_temperature"],
+      "level_type": "single_level",
+      "level_value": null,
+      "leadtime_type": "range",
+      "leadtime_start": 0,
+      "leadtime_end": 1008,
+      "leadtime_step": 24,
+      "output_names": {
+        "t2m": "2m_temperature"
+      },
+      "postprocess": "realign_step_range_end_labeled"
+    },
+    "pressure_level_vars": {
+      "cds_variable": ["specific_humidity", "temperature", "u_component_of_wind", "v_component_of_wind"],
+      "level_type": "pressure",
+      "level_value": ["1000_hpa", "850_hpa", "500_hpa", "200_hpa"],
+      "leadtime_type": "point",
+      "leadtime_start": 0,
+      "leadtime_end": 1008,
+      "leadtime_step": 24,
+      "output_names": {
+        "q": "specific_humidity",
+        "t": "temperature",
+        "u": "u_component_of_wind",
+        "v": "v_component_of_wind"
+      },
+      "postprocess": "flatten_pressure_levels"
+    }
+  },
+  "rainfall_only": {
+    "precip": {
+      "cds_variable": ["total_precipitation"],
+      "level_type": "single_level",
+      "level_value": null,
+      "leadtime_type": "point",
+      "leadtime_start": 0,
+      "leadtime_end": 1008,
+      "leadtime_step": 24,
+      "output_names": {
+        "tp": "total_precipitation"
+      },
+      "postprocess": "deaccumulate"
+    }
+  },
+  "combination_2": {
+    "wind_10m": {
+      "cds_variable": ["10_m_u_component_of_wind", "10_m_v_component_of_wind"],
+      "level_type": "single_level",
+      "level_value": null,
+      "leadtime_type": "point",
+      "leadtime_start": 0,
+      "leadtime_end": 1008,
+      "leadtime_step": 24,
+      "output_names": {
+        "u10": "10m_u_component_of_wind",
+        "v10": "10m_v_component_of_wind"
+      },
+      "postprocess": null
+    },
+    "flux_accum": {
+      "cds_variable": ["total_precipitation", "top_net_thermal_radiation"],
+      "level_type": "single_level",
+      "level_value": null,
+      "leadtime_type": "point",
+      "leadtime_start": 0,
+      "leadtime_end": 1008,
+      "leadtime_step": 24,
+      "output_names": {
+        "tp": "total_precipitation",
+        "ttr": "top_net_thermal_radiation"
+      },
+      "postprocess": "deaccumulate"
+    },
+    "surface_state_vars": {
+      "cds_variable": ["2_m_temperature", "soil_moisture_top_20_cm", "total_column_water"],
+      "level_type": "single_level",
+      "level_value": null,
+      "leadtime_type": "range",
+      "leadtime_start": 0,
+      "leadtime_end": 1008,
+      "leadtime_step": 24,
+      "output_names": {
+        "t2m": "2m_temperature",
+        "sm20": "soil_moisture_top_20cm",
+        "tcw": "total_column_water"
+      },
+      "postprocess": "realign_step_range_end_labeled"
+    },
+    "upper_air_vars": {
+      "cds_variable": ["geopotential_height", "specific_humidity", "u_component_of_wind", "v_component_of_wind"],
+      "level_type": "pressure",
+      "level_value": ["850_hpa", "200_hpa"],
+      "leadtime_type": "point",
+      "leadtime_start": 0,
+      "leadtime_end": 1008,
+      "leadtime_step": 24,
+      "output_names": {
+        "gh": "geopotential_height",
+        "q": "specific_humidity",
+        "u": "u_component_of_wind",
+        "v": "v_component_of_wind"
+      },
+      "postprocess": "flatten_pressure_levels"
+    }
+  }
+}
