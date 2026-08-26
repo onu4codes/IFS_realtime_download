@@ -6,8 +6,20 @@ Loads each variable group's downloaded GRIB file, standardizes it
 coords), runs it through postprocess.apply_postprocess(), applies
 output_names renaming (for groups where postprocess doesn't already
 handle naming -- see note below), merges all groups into one dataset
-for a model version date, and writes/appends the result to the target
-Zarr store.
+for a model date, and writes/appends the result to the target Zarr
+store.
+
+REUSED UNCHANGED from the reforecast pipeline. Nothing here depends on
+hindcast years or model-version-date semantics -- the 'time' dimension
+is inherited entirely from whatever cfgrib decodes out of the GRIB
+file (one value per real-time initialization date, vs. ~20 hindcast
+values per reforecast model-version date). build_dataset()/write_zarr()
+work identically either way; only the number of 'time' values per
+append differs. Since this pipeline downloads control-forecast only
+(no perturbed ensemble), the 'number' coord is still scalar cruft to
+drop, same as in the reforecast pipeline -- if a future version of
+this repo adds perturbed ensemble members, drop_scalar_coords() and
+the Zarr schema (a new 'number' dimension) would need real changes.
 
 Naming note: 'flatten_pressure_levels' does both the flatten AND the
 renaming internally (see postprocess.py docstring), since the two are
@@ -128,10 +140,10 @@ def _get_target_steps(group_names, variable_set="combination_1"):
 
 def build_dataset(group_file_map, model_date, variable_set="combination_1"):
     """
-    Build the full merged dataset for one model version date.
+    Build the full merged dataset for one initialization date.
 
     group_file_map: dict of {group_name: grib_file_path}
-    model_date: datetime.date for this model version date
+    model_date: datetime.date for this initialization date
 
     Defaults to variable_set='combination_1' so existing calls that
     don't pass this parameter keep working unchanged.
@@ -146,11 +158,22 @@ def build_dataset(group_file_map, model_date, variable_set="combination_1"):
 
     merged = xr.merge(list(processed.values()), join="outer")
 
+    # Real-time downloads have exactly one initialization date per file, so
+    # cfgrib decodes 'time' as a scalar coordinate rather than a dimension
+    # (unlike the reforecast pipeline, where multiple hdate values force
+    # cfgrib to create a real 'time' dimension). Promote it to a length-1
+    # dimension here so later appends (write_zarr's append_dim="time") have
+    # an actual axis to append along -- without this, the first write
+    # succeeds silently (mode="w" doesn't care), but every subsequent
+    # append fails because 'time' isn't a real dimension in the store.
+    if "time" not in merged.dims:
+        merged = merged.expand_dims("time")
+
     target_steps = _get_target_steps(group_file_map.keys(), variable_set=variable_set)
     merged = merged.reindex(step=target_steps)
 
     merged.attrs.update({
-        "description": f"S2S IFS reforecast, model version date {model_date:%Y-%m-%d}, variable_set={variable_set}",
+        "description": f"S2S IFS real-time forecast, initialization date {model_date:%Y-%m-%d}, variable_set={variable_set}",
         "n_lead_time": int(target_steps.max()),
         "step_range": f"0 to {int(target_steps.max())}",
     })

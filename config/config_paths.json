@@ -1,24 +1,23 @@
 {
-  "default": {
-    "zarr_store": "s2s_reforecast.zarr",
-    "zarr_store_sorted": "s2s_reforecast_sorted.zarr",
-    "workdir": "s2s_work",
-    "log_file": "logs/pipeline.log",
-    "description": "Main output zarr store, its time-sorted counterpart, scratch download directory, and single shared pipeline log file, all sibling to config/ and utils/ at the repo root"
+  "s2s_realtime_2025": {
+    "zarr_store": "s2s_realtime_2025.zarr",
+    "zarr_store_sorted": "s2s_realtime_2025_sorted.zarr",
+    "workdir": "s2s_work_realtime_2025",
+    "log_file": "logs/pipeline_realtime_2025.log",
+    "description": "Real-time forecast, full year 2025, Monday/Thursday cadence"
   },
-  "rainfall_0p25deg": {
-    "zarr_store": "s2s_rainfall_0p25.zarr",
-    "zarr_store_sorted": "s2s_rainfall_0p25_sorted.zarr",
-    "workdir": "s2s_work_rainfall_0p25",
-    "log_file": "logs/pipeline_rainfall_0p25.log",
-    "description": "Rainfall-only download at 0.25 degree resolution"
+  "s2s_realtime_2025_daily": {
+    "zarr_store": "s2s_realtime_2025_daily.zarr",
+    "zarr_store_sorted": "s2s_realtime_2025_daily_sorted.zarr",
+    "workdir": "s2s_work_realtime_2025_daily",
+    "log_file": "logs/pipeline_realtime_2025_daily.log",
+    "description": "Real-time forecast, full year 2025, daily cadence"
   },
-  "s2s_downscaling": {
-    "zarr_store": "s2s_predictors.zarr",
-    "zarr_store_sorted": "s2s_predictors_sorted.zarr",
-    "workdir": "s2s_work_predictors",
-    "log_file": "logs/pipeline_predictors.log",
-    "description": "Predictor variables for downscaling, including 2m temperature, pressure-level variables, and total precipitation  "
+  "s2s_realtime_2025_monsoon": {
+    "zarr_store": "s2s_realtime_2025_monsoon.zarr",
+    "zarr_store_sorted": "s2s_realtime_2025_monsoon_sorted.zarr",
+    "workdir": "s2s_work_realtime_2025_monsoon",
+    "log_file": "logs/pipeline_realtime_2025_monsoon.log",
+    "description": "Real-time forecast, monsoon season 2025 (April 21 to October 4), daily cadence"
   }
-
 }
