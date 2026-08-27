@@ -13,7 +13,7 @@
   },
   "s2s_realtime_2025_monsoon": {
     "start_date": "2025-04-21",
-    "end_date": "2025-04-22",
+    "end_date": "2025-10-04",
     "cadence": "all_dates",
     "description": "IFS S2S real-time forecast, monsoon season only (April 21 to October 4, 2025), all calendar days (model runs daily)"
   }
