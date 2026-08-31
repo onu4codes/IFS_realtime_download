@@ -86,9 +86,9 @@ conda activate climate
 cd "$SLURM_SUBMIT_DIR"
 python batch_download.py \
     --init-dates-config-key s2s_realtime_2025_monsoon \
-    --paths-key s2s_realtime_2025_monsoon \
-    --area-key south_asia \
-    --grid-key grids_1deg \
-    --variable-set combination_2 \
+    --paths-key s2s_realtime_2025_monsoon_rainfall \
+    --area-key south_asia_2 \
+    --grid-key grids_0p25deg \
+    --variable-set rainfall_only \
     --n-workers 4
 echo "Job finished at $(date)"
